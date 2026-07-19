@@ -17,16 +17,15 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // L0: Keyball44準拠ベース v2
-        // Shift=右親指内側+Z長押し / Ctrl=A長押し / Tab=左中央キー
-        // 左下角=Esc(長押しで設定層) / IME=Win長押しキーのタップ(Alt+`) / NAV(L2)=左親指最外 / Del=左親指内側(Keyball同位置)
-        // Enter=右親指最外(長押しでL1マウス) / BS=右小指(Keyball同位置)
+        // L0: Keyball44準拠ベース v3
+        // Shift=左下角+Z長押し / Ctrl=A長押し / Tab=左中央下キー / エンコーダ押込(左中央上)=設定層トグル
+        // IME=右親指内側(Alt+`) / Enter=右小指下段(旧/位置) / /=右親指最外(長押しでL1マウス) / BS=右小指(Keyball同位置)
         default_layer {
             bindings = <
 &kp Q             &kp W         &kp E         &kp R            &kp T                                         &kp Y      &kp U   &lt 5 I    &kp O    &kp P
-&mt LCTRL A       &kp S         &kp D         &kp F            &kp G      &kp TAB            &kp MINUS       &kp H      &kp J   &kp K      &kp L    &kp BACKSPACE
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V            &kp B      &kp LS(LG(S))      &kp GRAVE       &kp N      &kp M   &kp COMMA  &kp DOT  &kp SLASH
-&lt 6 ESCAPE      &mt LEFT_WIN LA(GRAVE)  &kp LEFT_ALT  &mo 2  &kp SPACE  &kp DEL            &kp LEFT_SHIFT &mo 3                                  &lt 1 ENTER
+&mt LCTRL A       &kp S         &kp D         &kp F            &kp G      &tog 6             &kp MINUS       &kp H      &kp J   &kp K      &kp L    &kp BACKSPACE
+&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V            &kp B      &kp TAB            &kp GRAVE       &kp N      &kp M   &kp COMMA  &kp DOT  &kp ENTER
+&kp LEFT_SHIFT    &kp LEFT_WIN  &kp LEFT_ALT  &mo 2  &kp SPACE  &kp DEL            &kp LA(GRAVE)  &mo 3                                  &lt 1 SLASH
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -50,7 +49,7 @@
 &kp ESCAPE  &kp LC(LS(TAB))  &kp UP_ARROW    &kp LC(TAB)      &kp PG_UP                            &kp LPAR   &kp RPAR   &kp LBKT   &kp RBKT   &kp BSLH
 &kp HOME    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp END    &trans       &trans       &kp MINUS  &kp EQUAL  &kp COLON  &kp SEMI   &kp SQT
 &trans      &kp LC(X)        &kp LC(C)       &kp LC(V)        &kp PG_DN  &mo 4        &trans       &kp LBRC   &kp RBRC   &trans     &trans     &trans
-&trans      &trans           &trans          &trans           &trans     &trans       &trans      &trans                                       &trans
+&trans      &trans           &trans          &trans           &trans     &trans       &trans      &trans                                       &kp ESCAPE
             >;
 
             sensor-bindings = <&inc_dec_kp LC(PG_UP) LC(PG_DN)>;
