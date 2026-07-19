@@ -11,7 +11,7 @@ layers:
   - {t: I, h: SCROLL}
   - O
   - P
-  - A
+  - {t: A, h: LCTRL}
   - S
   - D
   - F
@@ -35,15 +35,15 @@ layers:
   - ','
   - .
   - /
-  - LCTRL
-  - LEFT WIN
+  - {t: ESCAPE, h: SETTING}
+  - {t: Alt+`, h: LEFT WIN}
   - LEFT ALT
-  - {t: Alt+`, h: SETTING}
-  - SPACE
   - NAV
-  - ENTER
+  - SPACE
+  - DEL
+  - LEFT SHIFT
   - NUM
-  - {t: DEL, h: MOUSE}
+  - {t: ENTER, h: MOUSE}
   MOUSE:
   - {t: ▽, type: trans}
   - '7'
@@ -64,7 +64,7 @@ layers:
   - {t: ▽, type: trans}
   - PG UP
   - '&mkp MB1'
-  - '&mkp MB3'
+  - SCROLL
   - '&mkp MB2'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -76,7 +76,7 @@ layers:
   - {t: ▽, type: trans}
   - PG DN
   - '&msc SCRL_DOWN'
-  - {t: ▽, type: trans}
+  - '&mkp MB3'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -126,9 +126,9 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -214,9 +214,9 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - F12
@@ -299,10 +299,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - BT CLR
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
