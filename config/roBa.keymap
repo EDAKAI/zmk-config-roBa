@@ -9,87 +9,63 @@
 };
 
 &trackball {
-    automouse-layer = <4>;
+    automouse-layer = <1>;
     scroll-layers = <5>;
-
-    // arrows {
-    //     layers = <3>;
-    //     bindings =
-    //         <&kp RIGHT_ARROW>,
-    //         <&kp LEFT_ARROW>,
-    //         <&kp UP_ARROW>,
-    //         <&kp DOWN_ARROW>;
-
-    //     tick = <10>;
-    //     wait-ms = <5>;
-    //     tap-ms = <5>;
-    // };
 };
 
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        tab {
-            bindings = <&kp TAB>;
-            key-positions = <11 12>;
-        };
-
-        shift_tab {
-            bindings = <&kp LS(TAB)>;
-            key-positions = <12 13>;
-        };
-
-        muhennkann {
-            bindings = <&to_layer_0 INT_MUHENKAN>;
-            key-positions = <11 10>;
-        };
-
-        double_quotation {
-            bindings = <&kp DOUBLE_QUOTES>;
-            key-positions = <20 21>;
-        };
-
-        eq {
-            bindings = <&kp EQUAL>;
-            key-positions = <24 25>;
-        };
-    };
-
-    macros {
-        to_layer_0: to_layer_0 {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
-            label = "TO_LAYER_0";
-        };
-    };
-
-    behaviors {
-        lt_to_layer_0: lt_to_layer_0 {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_TO_0";
-            bindings = <&mo>, <&to_layer_0>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
+        // L0: Keyball44準拠ベース
+        // 小指外側列の代替: Shift=Z長押し / Ctrl=左下角 / Tab=左中央キー
+        // BS=右小指(Keyballと同位置) / Enter=右親指内側 / IME=左親指最外(Alt+`)
         default_layer {
             bindings = <
-&kp Q             &kp W         &kp E         &kp R                        &kp T                                                          &kp Y        &kp U  &lt 5 I    &kp O    &kp P
-&kp A             &kp S         &kp D         &kp F                        &kp G        &kp LS(LG(S))                      &kp MINUS      &kp H        &kp J  &kp K      &kp L    &kp SQT
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V                        &kp B        &kp COLON                          &kp SEMICOLON  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp LCTRL         &kp LEFT_WIN  &kp LEFT_ALT  &lt_to_layer_0 6 INT_HENKAN  &lt 2 SPACE  &lt_to_layer_0 3 INT_MUHENKAN      &kp BACKSPACE  &lt 1 ENTER                             &kp DEL
+&kp Q             &kp W         &kp E         &kp R            &kp T                                         &kp Y      &kp U   &lt 5 I    &kp O    &kp P
+&kp A             &kp S         &kp D         &kp F            &kp G      &kp TAB            &kp MINUS       &kp H      &kp J   &kp K      &kp L    &kp BACKSPACE
+&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V            &kp B      &kp LS(LG(S))      &kp GRAVE       &kp N      &kp M   &kp COMMA  &kp DOT  &kp SLASH
+&kp LCTRL         &kp LEFT_WIN  &kp LEFT_ALT  &lt 6 LA(GRAVE)  &kp SPACE  &mo 2              &kp ENTER      &mo 3                                   &lt 1 DEL
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
+        // L1: マウス(オートマウス着地層) + 左手789 = Keyball L1準拠
+        MOUSE {
+            bindings = <
+&trans  &kp N7  &kp N8  &kp N9  &trans                          &trans       &msc SCRL_LEFT  &msc SCRL_UP    &msc SCRL_RIGHT  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans      &kp PG_UP    &mkp MB1        &mkp MB3        &mkp MB2         &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans      &kp PG_DN    &msc SCRL_DOWN  &trans          &trans           &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans      &trans                                                        &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        // L2: ナビ+記号 = Keyball L2準拠 (矢印ESDF, Copy/Paste/Cut, 右手記号)
+        NAV {
+            bindings = <
+&kp ESCAPE  &kp LC(LS(TAB))  &kp UP_ARROW    &kp LC(TAB)      &kp PG_UP                            &kp LPAR   &kp RPAR   &kp LBKT   &kp RBKT   &kp BSLH
+&kp HOME    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp END    &trans       &trans       &kp MINUS  &kp EQUAL  &kp COLON  &kp SEMI   &kp SQT
+&trans      &kp LC(X)        &kp LC(C)       &kp LC(V)        &kp PG_DN  &mo 4        &trans       &kp LBRC   &kp RBRC   &trans     &trans     &trans
+&trans      &trans           &trans          &trans           &trans     &trans       &trans      &trans                                       &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp LC(PG_UP) LC(PG_DN)>;
+        };
+
+        // L3: 右手テンキー + 左手に右手数字のShift記号を同位置ミラー = Keyball L3準拠
+        NUM {
+            bindings = <
+&trans  &kp AMPS   &kp ASTRK  &kp LPAR   &trans                            &trans    &kp N7  &kp N8  &kp N9  &kp MINUS
+&trans  &kp DLLR   &kp PRCNT  &kp CARET  &trans  &trans        &trans      &trans    &kp N4  &kp N5  &kp N6  &kp PLUS
+&trans  &kp EXCL   &kp AT     &kp HASH   &trans  &kp RPAR      &trans      &kp N0    &kp N1  &kp N2  &kp N3  &trans
+&trans  &kp LC(X)  &kp LC(C)  &kp LC(V)  &trans  &trans        &trans     &trans                             &trans
+            >;
+        };
+
+        // L4: ファンクションキー (L2中に左中央下キーで一時アクセス)
         FUNCTION {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                       &kp F1  &kp F2  &kp F3  &kp F4  &kp F5
@@ -99,35 +75,7 @@
             >;
         };
 
-        NUM {
-            bindings = <
-&kp MINUS                   &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PLUS                                                   &kp CARET         &kp AMPERSAND      &kp TILDE       &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
-&kp SLASH                   &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp ASTERISK  &kp LC(LA(KP_NUMBER_0))      &kp UNDERSCORE  &kp EXCLAMATION   &kp AT_SIGN        &kp HASH        &kp DOLLAR            &kp PERCENT
-&mt LEFT_SHIFT KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PERIOD    &kp EQUAL                    &trans          &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_BRACE  &kp RIGHT_BRACE       &kp BACKSLASH
-&trans                      &trans           &trans           &trans           &trans        &trans                       &trans          &trans                                                                     &kp PIPE
-            >;
-        };
-
-        ARROW {
-            bindings = <
-&kp ESCAPE      &kp LC(LS(TAB))         &kp UP_ARROW    &kp LC(TAB)              &trans                       &trans  &trans  &trans  &trans  &trans
-&kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&kp LEFT_SHIFT  &kp LG(LS(LEFT_ARROW))  &trans          &kp LG(LS(RIGHT_ARROW))  &trans   &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans          &trans                  &trans          &trans                   &trans   &trans      &trans  &trans                          &trans
-            >;
-
-            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
-        };
-
-        MOUSE {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                &trans
-            >;
-        };
-
+        // L5: スクロール層 (Iキー長押しでボール=ホイール)
         SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
@@ -137,7 +85,8 @@
             >;
         };
 
-        layer_6 {
+        // L6: 設定層 (IMEキー長押し) Bluetooth切替・bootloader
+        SETTING {
             bindings = <
 &trans  &trans        &trans        &trans        &trans                           &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
 &trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans        &trans        &trans        &trans        &trans
