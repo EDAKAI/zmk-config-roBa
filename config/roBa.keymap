@@ -17,26 +17,27 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // L0: Keyball44準拠ベース
-        // 小指外側列の代替: Shift=Z長押し / Ctrl=左下角 / Tab=左中央キー
-        // BS=右小指(Keyballと同位置) / Enter=右親指内側 / IME=左親指最外(Alt+`)
+        // L0: Keyball44準拠ベース v2
+        // Shift=右親指内側+Z長押し / Ctrl=A長押し / Tab=左中央キー
+        // 左下角=Esc(長押しで設定層) / IME=Win長押しキーのタップ(Alt+`) / NAV(L2)=左親指最外 / Del=左親指内側(Keyball同位置)
+        // Enter=右親指最外(長押しでL1マウス) / BS=右小指(Keyball同位置)
         default_layer {
             bindings = <
 &kp Q             &kp W         &kp E         &kp R            &kp T                                         &kp Y      &kp U   &lt 5 I    &kp O    &kp P
-&kp A             &kp S         &kp D         &kp F            &kp G      &kp TAB            &kp MINUS       &kp H      &kp J   &kp K      &kp L    &kp BACKSPACE
+&mt LCTRL A       &kp S         &kp D         &kp F            &kp G      &kp TAB            &kp MINUS       &kp H      &kp J   &kp K      &kp L    &kp BACKSPACE
 &mt LEFT_SHIFT Z  &kp X         &kp C         &kp V            &kp B      &kp LS(LG(S))      &kp GRAVE       &kp N      &kp M   &kp COMMA  &kp DOT  &kp SLASH
-&kp LCTRL         &kp LEFT_WIN  &kp LEFT_ALT  &lt 6 LA(GRAVE)  &kp SPACE  &mo 2              &kp ENTER      &mo 3                                   &lt 1 DEL
+&lt 6 ESCAPE      &mt LEFT_WIN LA(GRAVE)  &kp LEFT_ALT  &mo 2  &kp SPACE  &kp DEL            &kp LEFT_SHIFT &mo 3                                  &lt 1 ENTER
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
-        // L1: マウス(オートマウス着地層) + 左手789 = Keyball L1準拠
+        // L1: マウス(オートマウス着地層450ms) K長押し=ボールスクロール
         MOUSE {
             bindings = <
 &trans  &kp N7  &kp N8  &kp N9  &trans                          &trans       &msc SCRL_LEFT  &msc SCRL_UP    &msc SCRL_RIGHT  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans      &kp PG_UP    &mkp MB1        &mkp MB3        &mkp MB2         &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans      &kp PG_DN    &msc SCRL_DOWN  &trans          &trans           &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans      &kp PG_UP    &mkp MB1        &mo 5     &mkp MB2  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans      &kp PG_DN    &msc SCRL_DOWN  &mkp MB3  &trans    &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans      &trans                                                        &trans
             >;
 
