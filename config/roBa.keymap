@@ -38,7 +38,7 @@
 &kp LEFT_SHIFT    &kp LEFT_WIN  &kp LEFT_ALT  &mo 2  &kp SPACE  &kp DEL            &kp JP_ZENHAN  &mo 3                                  &lt 1 SLASH
             >;
 
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+            sensor-bindings = <&inc_dec_kp LC(PG_UP) LC(PG_DN)>;
         };
 
         // L1: マウス(オートマウス着地層450ms) K長押し=ボールスクロール
@@ -62,7 +62,7 @@
 &trans        &trans           &trans          &trans           &trans      &trans        &trans       &kp K_APP                                             &kp ESCAPE
             >;
 
-            sensor-bindings = <&inc_dec_kp LC(PG_UP) LC(PG_DN)>;
+            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
         // L3: 右手テンキー + 左手に同位置ミラーのShift記号(JIS対応) +の下に*
