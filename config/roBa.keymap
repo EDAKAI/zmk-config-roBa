@@ -22,14 +22,16 @@
             compatible = "zmk,behavior-tri-state";
             #binding-cells = <0>;
             bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
-            timeout-ms = <700>;
+            timeout-ms = <1000>;
+            ignored-layers = <1 5>;
         };
 
         swapper_bck: swapper_bck {
             compatible = "zmk,behavior-tri-state";
             #binding-cells = <0>;
             bindings = <&kt LALT>, <&kp LS(TAB)>, <&kt LALT>;
-            timeout-ms = <700>;
+            timeout-ms = <1000>;
+            ignored-layers = <1 5>;
         };
 
         rot_alt_tab: rot_alt_tab {
