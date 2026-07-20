@@ -18,7 +18,8 @@
 / {
     behaviors {
         // エンコーダ回転でAlt+Tabウィンドウ切替(tri-state):
-        // 回し始めでAlt押込→Tab送出→確定は ①ボールに触れる(AML発動) ②右小指下段の確定キー ③1.5秒放置
+        // 回し始めでAlt押込→Tab送出→確定は ①ボールに触れる(AML発動) ②何かキーを押す ③停止後1.5秒
+        // (停止後1.5秒はEDAKAI fork修正: k_work_reschedule化で回転のたびにタイマー延長)
         swapper_fwd: swapper_fwd {
             compatible = "zmk,behavior-tri-state";
             #binding-cells = <0>;
@@ -69,13 +70,13 @@
         // L0: Keyball44準拠ベース v3
         // Shift=左下角+Z長押し / Ctrl=A長押し / Tab=左中央下キー / エンコーダ押込(左中央上)=設定層トグル
         // IME=右親指内側(半角/全角) / BS=右小指 / /=右親指最外(長押しでL1マウス)
-        // J長押し=右Shift(大文字A用・逆手Shift) / 右小指下段(&none)=swapper確定専用キー
+        // J長押し=右Shift(大文字A用・逆手Shift) / 右小指下段=/(JISの？・用)
 
         default_layer {
             bindings = <
 &kp Q             &kp W         &kp E         &kp R  &kp T                                  &kp Y  &kp U  &lt 5 I    &kp O    &kp P
 &mt LEFT_SHIFT A  &kp S         &kp D         &kp F  &kp G      &tog 6       &kp MINUS      &kp H  &mt RIGHT_SHIFT J  &kp K      &kp L    &kp BACKSPACE
-&mt LCTRL Z       &kp X         &kp C         &kp V  &kp B      &kp TAB      &kp JP_GRAVE   &kp N  &kp M  &kp COMMA  &kp DOT  &none
+&mt LCTRL Z       &kp X         &kp C         &kp V  &kp B      &kp TAB      &kp JP_GRAVE   &kp N  &kp M  &kp COMMA  &kp DOT  &kp SLASH
 &go_back          &kp LEFT_WIN  &kp LEFT_ALT  &mo 2  &kp SPACE  &kp DEL      &kp JP_ZENHAN  &mo 3                             &lt 1 SLASH
             >;
 

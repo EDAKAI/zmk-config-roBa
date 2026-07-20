@@ -17,7 +17,7 @@ manifest:
       remote: EDAKAI
       revision: main
     - name: zmk-tri-state
-      remote: dhruvinsh
-      revision: ebbc1f0ccdb51669650bb0ac3e34920d09e62400
+      remote: EDAKAI
+      revision: 9c31562b73ce34e5705af3d33e759992c5ee0308
   self:
     path: config
