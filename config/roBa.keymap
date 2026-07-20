@@ -15,6 +15,30 @@
 };
 
 / {
+    behaviors {
+        // エンコーダ回転でAlt+Tabウィンドウ切替(tri-state):
+        // 回し始めでAlt押込→1ノッチごとにTab→0.7秒無操作or他キーでAlt解放(確定)
+        swapper_fwd: swapper_fwd {
+            compatible = "zmk,behavior-tri-state";
+            #binding-cells = <0>;
+            bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+            timeout-ms = <700>;
+        };
+
+        swapper_bck: swapper_bck {
+            compatible = "zmk,behavior-tri-state";
+            #binding-cells = <0>;
+            bindings = <&kt LALT>, <&kp LS(TAB)>, <&kt LALT>;
+            timeout-ms = <700>;
+        };
+
+        rot_alt_tab: rot_alt_tab {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&swapper_fwd>, <&swapper_bck>;
+        };
+    };
+
     macros {
         close_tab: close_tab {
             compatible = "zmk,behavior-macro";
@@ -53,7 +77,7 @@
 &go_back          &kp LEFT_WIN  &kp LEFT_ALT  &mo 2  &kp SPACE  &kp DEL      &kp JP_ZENHAN  &mo 3                             &lt 1 SLASH
             >;
 
-            sensor-bindings = <&inc_dec_kp LC(PG_UP) LC(PG_DN)>;
+            sensor-bindings = <&rot_alt_tab>;
         };
 
         // L1: マウス(オートマウス着地層450ms) K長押し=ボールスクロール
@@ -73,13 +97,13 @@
 
         NAV {
             bindings = <
-&kp F12           &kp LC(LS(TAB))  &kp UP_ARROW    &kp LC(TAB)      &kp PG_UP                                 &kp JP_LPAR  &kp JP_MINUS  &kp JP_EQUAL  &kp AT_SIGN   &kp JP_LBKT
-&kp LEFT_BRACKET  &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp RIGHT_BRACKET  &trans      &trans     &kp END      &kp JP_UNDER  &kp JP_PLUS   &kp JP_COLON  &kp JP_SQT
+&kp F12           &kp LC(LS(TAB))  &kp UP_ARROW    &kp LC(TAB)      &kp PG_UP                                 &kp JP_LPAR  &kp JP_MINUS  &kp JP_EQUAL  &kp JP_AT     &kp JP_LBKT
+&kp JP_LBKT       &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp JP_RBKT        &trans      &trans     &kp END      &kp JP_UNDER  &kp JP_PLUS   &kp JP_COLON  &kp JP_SQT
 &trans            &kp LC(X)        &kp LC(C)       &kp LC(V)        &kp PG_DN          &mo 4       &kp JP_AT  &kp HOME     &kp JP_DQT    &trans        &trans        &kp SLASH
 &go_foward        &trans           &trans          &trans           &trans             &trans      &trans     &kp K_APP                                              &kp ESCAPE
             >;
 
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+            sensor-bindings = <&inc_dec_kp LC(PG_UP) LC(PG_DN)>;
         };
 
         // L3: 右手テンキー + 左手に同位置ミラーのShift記号(JIS対応) +の下に*
