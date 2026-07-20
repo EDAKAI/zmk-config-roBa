@@ -29,6 +29,13 @@
             bindings = <&kp LC(Z)>;
             label = "GO_BACK";
         };
+
+        go_foward: go_foward {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Y)>;
+            label = "GO_FOWARD";
+        };
     };
 
     keymap {
@@ -69,7 +76,7 @@
 &kp F12      &kp LC(LS(TAB))  &kp UP_ARROW    &kp LC(TAB)      &kp PG_UP                          &kp JP_LPAR  &kp JP_MINUS  &kp JP_EQUAL  &kp JP_YEN    &kp JP_LBKT
 &kp JP_RBKT  &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp JP_YEN  &trans      &trans     &kp END      &kp JP_UNDER  &kp JP_PLUS   &kp JP_COLON  &kp JP_SQT
 &trans       &kp LC(X)        &kp LC(C)       &kp LC(V)        &kp PG_DN   &mo 4       &kp JP_AT  &kp HOME     &kp JP_DQT    &trans        &trans        &kp SLASH
-&trans       &trans           &trans          &trans           &trans      &trans      &trans     &kp K_APP                                              &kp ESCAPE
+&go_foward   &trans           &trans          &trans           &trans      &trans      &trans     &kp K_APP                                              &kp ESCAPE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
